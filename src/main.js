@@ -102,7 +102,7 @@ function calculateResult (number1, number2, operator) {
       return num1 + num2
     case '-':
       return num1 - num2
-    case 'x':
+    case '*':
       return num1 * num2
     case '/':
       if (num2 == 0) {
