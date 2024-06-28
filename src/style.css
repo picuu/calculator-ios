@@ -1,0 +1,112 @@
+:root {
+  --clr-text: #f1f1f1;
+  --clr-text-secondary: #010101;
+  
+  --clr-primary: rgb(50, 50, 50);
+  --clr-secondary: rgb(166, 166, 166);
+  --clr-accent: rgb(255, 145, 5);
+  --clr-accent-soft: rgb(255, 190, 100);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 75dvh;
+  display: grid;
+  place-content: center;
+  background-color: #050505;
+  font-size: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding: .75rem;
+}
+
+#display {
+  display: flex;
+  justify-content: end;
+  padding: .25rem .75rem;
+  font-size: 2.5rem;
+}
+
+.buttons {
+  display: flex;
+  gap: .5rem;
+}
+
+.buttons > div {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.buttons section {
+  display: flex;
+  gap: .5rem;
+}
+
+.buttons section.flex-col {
+  flex-direction: column;
+}
+
+.buttons section.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+button {
+  min-width: 52px;
+  width: 52px;
+  height: 52px;
+  padding: .5rem;
+  aspect-ratio: 1 / 1;
+  background-color: var(--clr-primary);
+  border: none;
+  border-radius: 100vw;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  cursor: pointer;
+  transition: filter .2s ease-in-out;
+}
+
+button.primary-btn {
+  background-color: var(--clr-accent);
+  transition: background-color .2s ease-in-out, color .2s ease-in-out;
+}
+
+button.secondary-btn {
+  background-color: var(--clr-secondary);
+  color: var(--clr-text-secondary);
+}
+
+button.long-btn {
+  grid-column: span 2;
+  width: 100%;
+}
+
+button:hover {
+  filter: brightness(1.8);
+}
+
+button.primary-btn:hover {
+  background-color: var(--clr-accent-soft);
+  filter: none;
+}
+
+button.secondary-btn:hover {
+  filter: brightness(1.25);
+}
+
+button.primary-btn.selected {
+  background-color: var(--clr-text);
+  color: var(--clr-accent);
+}
