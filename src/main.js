@@ -59,7 +59,7 @@ function refreshCalculatorUI () {
   if (isOperatorSelected) highlightSelectedOperatorButton(operatorButtons, operator)
   else unhighlightOperatorButtons(operatorButtons)
 
-  if (isNumber1Finished && number2.length > 0 && result != null && !isNegative) return
+  if (isNumber1Finished && number2.length > 0 && result != null && !isNegative && !hasDecimal) return
 
   if (isNumber1Finished && number2.length > 0) updateDisplayValue(display, number2)
   else updateDisplayValue(display, number1)
@@ -79,7 +79,7 @@ function updateNumber1 (value) {
 }
 
 function updateNumber2 (value) {
-  if (number2.length > 0 && result != null && number2 != '-') {
+  if (number2.length > 0 && result != null && number2 != '-' && number2 != '0.') {
     number1 = String(result)
     number2 = value
     result = null
@@ -192,9 +192,14 @@ export function handleEqual () {
   if (number2.length <= 0) return
 
   result = calculateResult(number1, number2, operator)
+
+  console.log(result)
+  // TODO: fix result 7.6 + 0.1 = 7.6999999999 so is displayed in mathematic notation
+
   if (String(result).length > DISPLAY_MAX_LENGHT) result = formatResult(result)
   resultNeedToBeShown = true
   isOperatorSelected = false
+  hasDecimal = false
 
   // number1 = number2
   number1 = String(result)
@@ -210,12 +215,19 @@ export function handleDecimal () {
 
     if (isCurrentNumberEmpty) number2 = '0.'
     else number2 += '.'
+
+    isCurrentNumberEmpty = false
   } else {
     if (number1.length >= DISPLAY_MAX_LENGHT) return
 
     if (isCurrentNumberEmpty) number1 = '0.'
     else number1 += '.'
+
+    isCurrentNumberEmpty = false
   }
+
+  console.log('number1', number1)
+  console.log('number2', number2)
 
   hasDecimal = true
 
